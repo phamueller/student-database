@@ -25,7 +25,7 @@ CREATE TABLE student (
 INSERT INTO student (student_name, student_number, student_class, student_major) VALUES
 ('John Doe', 75, 'Data modelling and database programming', 'Informatics'),
 ('Max Ruin', 85, 'Data modelling and database programming', 'Informatics'),
-('Arnold', 55, 'Data modelling and database programming', 'Informatics'),
+('John Rob', 55, 'Data modelling and database programming', 'Informatics'),
 ('Krish Star', 60, 'Data modelling and database programming', 'Informatics');
 
 
