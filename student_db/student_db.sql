@@ -44,6 +44,6 @@ CREATE TABLE course (
 
 INSERT INTO course (course_number, course_hours, course_department) VALUES
 ('DSDD00100', 150, 'Data modelling and database programming', 'Informatics'),
-('DSPRAXP300', 150, 'Praxisprojekt III', 'Informatics'),
+('DSPRAXP300', 150, 'Practical project III', 'Informatics'),
 
 SELECT * FROM course;
