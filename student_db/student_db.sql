@@ -1,8 +1,8 @@
 
--- DROP DATABASE IF EXISTS iu_db;
--- CREATE DATABASE iu_db;
+-- DROP DATABASE IF EXISTS student_db;
+-- CREATE DATABASE student_db;
 
-USE iu_db;
+USE student_db;
 
 -- Create tables
 -- Table: student, course, section, grade_report, prerequisite
@@ -43,9 +43,9 @@ CREATE TABLE course (
     -- FOREIGN KEY (course_id) REFERENCES student(student_id)
 );
 
-INSERT INTO course (course_number, course_hours, course_department) VALUES
+INSERT INTO course (course_number, course_hours, course_name, course_department) VALUES
 ('DSDD00100', 150, 'Data modelling and database programming', 'Informatics'),
-('DSPRAXP300', 150, 'Practical project III', 'Informatics'),
+('DSPRAXP300', 150, 'Practical project III', 'Informatics');
 
 SELECT * FROM course;
 
@@ -80,4 +80,5 @@ FROM student s
 JOIN student_course sc ON s.student_id = sc.student_id -- INNER JOIN, OUTER JOIN, LEFT JOIN, RIGHT JOIN 
 JOIN course c ON c.course_id = sc.course_id
 WHERE c.course_id = 1
-ORDER BY s.student_number ASC; -- DESC
+ORDER BY s.student_number ASC
+LIMIT 200; -- DESC
