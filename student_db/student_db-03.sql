@@ -100,8 +100,9 @@ FROM personal
 START WITH manager_id IS NULL
 CONNECT BY PRIOR personal_id = manager_id;
 -- Connect By wird von MariaDB nicht unterstützt
--- Daher wird eine rekursive Abfrage erstellt
 
+
+-- Eine rekursive Abfrage zur Abbildung der Hierarchieebenen
 WITH RECURSIVE HierarchicalCTE (level, name, personal_id, manager_id) AS (
   SELECT
     p1.level,
