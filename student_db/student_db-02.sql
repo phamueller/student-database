@@ -11,7 +11,6 @@ CREATE TABLE artikel (
   PRIMARY KEY (artikel_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-
 -- SHOW VARIABLES LIKE 'auto_inc%';
 -- ALTER TABLE artikel AUTO_INCREMENT = 1;
 
@@ -22,8 +21,6 @@ INSERT INTO artikel (artikel_nr, preis, name, verfuegbarkeit) VALUES
 ('UIHJKHSD7',8.99,'Around the Planet','in 2 Tagen');
 
 SELECT * FROM artikel;
-
-
 
 DROP TABLE IF EXISTS film;
 
@@ -46,3 +43,66 @@ INSERT INTO film (regisseur, sprachen, untertitel, anzahl_discs, studio, medium,
 
 SELECT * FROM film;
 
+
+/** JOINs **/
+SELECT 
+	a.name, 
+	f.regisseur,
+	a.preis,
+	a.verfuegbarkeit	
+FROM artikel a 
+JOIN film f ON a.artikel_id = f.artikel_id
+ORDER by a.preis;
+
+SELECT 
+	a.*, f.*
+FROM artikel a 
+JOIN film f ON a.artikel_id = f.artikel_id;
+
+SELECT 
+	anzahl_Discs,
+	-- verfuegbarkeit 
+	COUNT(*) AS Anzahl 
+FROM artikel a 
+JOIN film f ON a.artikel_id = f.artikel_id;
+
+SELECT 
+	anzahl_Discs,
+	COUNT(*) AS Anzahl 
+FROM artikel NATURAL JOIN film
+WHERE verfuegbarkeit = 'sofort' 
+AND anzahl_discs > 1 
+GROUP BY anzahl_discs ;
+
+SELECT *
+FROM artikel 
+INNER JOIN film
+ON artikel.artikel_id=film.artikel_id;
+
+SELECT * 
+FROM artikel
+NATURAL JOIN film;
+
+SELECT * 
+FROM artikel 
+INNER JOIN film USING(artikel_id);
+
+
+/** VIEWs **/
+DROP VIEW IF EXISTS v_sofort_verfuegbare_filme;
+
+CREATE VIEW v_sofort_verfuegbare_filme AS 
+	SELECT * 
+	FROM artikel a INNER JOIN film f USING(artikel_id)
+	WHERE a.verfuegbarkeit = 'sofort' 
+	ORDER BY a.name;
+
+SELECT * 
+FROM v_sofort_verfuegbare_filme
+WHERE sprachen LIKE '%DE%' OR sprachen LIKE 'DE%';
+
+ALTER VIEW v_sofort_verfuegbare_filme AS 
+	SELECT * 
+	FROM artikel a INNER JOIN film f USING(artikel_id)
+	WHERE a.verfuegbarkeit = 'in 3 Tagen' 
+	ORDER BY a.name;	
