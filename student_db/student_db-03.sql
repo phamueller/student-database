@@ -91,7 +91,7 @@ CREATE VIEW v_personal_topmanager AS (
 SELECT * FROM v_personal_topmanager;
 
 
--- Abfrage zur Abbildung der Hierarchie
+-- Beispiel einer Hierarchieabbildung
 SELECT 
 	level, LPAD (' ', 2 * (level- 1)) || name AS 'employee', 
 	personal_id, 
