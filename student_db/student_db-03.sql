@@ -2,7 +2,6 @@ USE student_db;
 
 /** NOT NULL UNIQUE **/
 DROP TABLE IF EXISTS gutscheinaktion;
-
 CREATE TABLE gutscheinaktion (
 	aktions_id INTEGER AUTO_INCREMENT,
 	beginnaktion TIMESTAMP NOT NULL,
@@ -18,7 +17,6 @@ SELECT * FROM gutscheinaktion;
 
 /** Typenkonvertierung **/
 DROP TABLE IF EXISTS t;
-
 CREATE TABLE t (
 	i INTEGER, 
 	d DECIMAL(5,2), 
@@ -39,7 +37,6 @@ SELECT * FROM t;
 
 /** Komplexe Datentypen **/
 DROP TABLE IF EXISTS k;
-
 CREATE TABLE k (
 	datumNull DATE, 
 	zeitNull TIME, 
@@ -55,17 +52,13 @@ INSERT INTO k VALUES
 
 SELECT * FROM k;
 
+-- Allgemeines INSERT INTO-Schema
 INSERT INTO tabelle2 (spalte1,…,spalteN)
 SELECT spalte1,…,spalteN FROM tabelle1 WHERE bedingung;
 
-
+-- Allgemeines CTE-Schema
 WITH [RECURSIVE] with_query [, ...]
 SELECT ...
-
-
-SELECT LEVEL, LPAD (' ', 2 * (LEVEL - 1)) || ename "employee", empno, mgr "manager"
-FROM emp START WITH mgr IS NULL
-CONNECT BY PRIOR empno = mgr;
 
 
 DROP TABLE IF EXISTS personal;
@@ -87,7 +80,6 @@ INSERT INTO personal (level, name, manager_id) VALUES
 
 SELECT * FROM personal;
 
-
 DROP VIEW IF EXISTS v_personal_topmanager;
 CREATE VIEW v_personal_topmanager AS (
 	SELECT 
@@ -97,6 +89,53 @@ CREATE VIEW v_personal_topmanager AS (
 	FROM personal WHERE manager_id IS NULL	
 );
 SELECT * FROM v_personal_topmanager;
+
+
+-- Abfrage zur Abbildung der Hierarchie
+SELECT 
+	level, LPAD (' ', 2 * (level- 1)) || name AS 'employee', 
+	personal_id, 
+	manager_id AS 'manager'
+FROM personal 
+START WITH manager_id IS NULL
+CONNECT BY PRIOR personal_id = manager_id;
+-- Connect By wird von MariaDB nicht unterstützt
+-- Daher wird eine rekursive Abfrage erstellt
+
+WITH RECURSIVE HierarchicalCTE (level, name, personal_id, manager_id) AS (
+  SELECT
+    p1.level,
+CONCAT(LPAD(' ', 2 + p1.level), p1.name),
+    -- LPAD(p1.name, 2, '.'),
+	-- p1.name,
+    p1.personal_id,
+    p1.manager_id
+  FROM
+    personal p1
+  WHERE
+    p1.manager_id IS NULL
+  UNION ALL
+  SELECT
+    p2.level,
+CONCAT(LPAD(' ', 2 + p2.level),p2.name),
+    -- LPAD(p2.name, 2, '.'),
+    -- p2.name,
+    p2.personal_id,
+    p2.manager_id
+  FROM
+    personal p2
+  INNER JOIN
+    HierarchicalCTE cte ON p2.manager_id = cte.personal_id
+)
+SELECT 
+	level, 
+	name, 
+	personal_id, 
+	manager_id
+FROM
+	HierarchicalCTE
+ORDER BY
+	level, personal_id;
 
 
 DROP VIEW IF EXISTS v_personal_hierarchie;
@@ -156,3 +195,10 @@ CREATE VIEW v_personal_hierarchie_rec AS
 	  level, personal_id;
 
 SELECT * FROM v_personal_hierarchie_rec;
+
+
+
+
+
+
+
