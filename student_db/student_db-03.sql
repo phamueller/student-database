@@ -105,7 +105,7 @@ CONNECT BY PRIOR personal_id = manager_id;
 WITH RECURSIVE HierarchicalCTE (level, name, personal_id, manager_id) AS (
   SELECT
     p1.level,
-CONCAT(LPAD(' ', 2 + p1.level), p1.name),
+	CONCAT(LPAD(' ', 2 + p1.level), p1.name),
     -- LPAD(p1.name, 2, '.'),
 	-- p1.name,
     p1.personal_id,
@@ -117,8 +117,7 @@ CONCAT(LPAD(' ', 2 + p1.level), p1.name),
   UNION ALL
   SELECT
     p2.level,
-CONCAT(LPAD(' ', 2 + p2.level),p2.name),
-    -- LPAD(p2.name, 2, '.'),
+	CONCAT(LPAD(' ', 2 + p2.level), p2.name),
     -- p2.name,
     p2.personal_id,
     p2.manager_id
