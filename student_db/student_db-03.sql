@@ -12,7 +12,41 @@ CREATE TABLE gutscheinaktion (
 	PRIMARY KEY (aktions_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
+INSERT INTO gutscheinaktion 
+	(beginnaktion, endeaktion, titel, gutscheincode) VALUES 
+	('2023-12-20', '2023-12-26', 'Weihnachtsspecial', '1223-CHSP');
+
 SELECT * FROM gutscheinaktion;
+
+UPDATE gutscheinaktion 
+	-- SET endeaktion = '2023-12-31'
+	SET endeaktion = '2023-12-26'
+WHERE gutscheincode = '1223-CHSP';
+
+SELECT * FROM gutscheinaktion;
+
+SELECT
+    titel AS Gutschein_Titel,
+    DATEDIFF(endeaktion, beginnaktion) AS Differenz_in_Tagen
+FROM
+    gutscheinaktion;
+
+INSERT INTO gutscheinaktion 
+	(beginnaktion, endeaktion, titel, gutscheincode)
+SELECT beginnaktion, '2024-02-01', 'Neujahrsspecial', '0124-NJSP' 
+	FROM gutscheinaktion 
+WHERE gutscheincode = '1223-CHSP';
+
+DELETE FROM gutscheinaktion WHERE gutscheincode = '0124-NJSP';
+
+SELECT * FROM gutscheinaktion;
+
+UPDATE gutscheinaktion 
+	SET beginnaktion = '2024-01-01'
+WHERE gutscheincode = '0124-NJSP';
+
+-- SHOW PROCESSLIST;
+-- ANALYZE TABLE gutscheinaktion;
 
 
 /** Typenkonvertierung **/
