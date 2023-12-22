@@ -7,9 +7,8 @@ CREATE TEMPORARY TABLE temp_gutscheinaktion (
     endeaktion TIMESTAMP NOT NULL,
     titel VARCHAR (500) NOT NULL,
     beschreibung TEXT,
-    gutscheincode VARCHAR(100) NOT NULL -- UNIQUE
+    gutscheincode VARCHAR(100) NOT NULL UNIQUE
 );
-
 
 SET @counter = (SELECT IFNULL(MAX(id), 0) FROM temp_gutscheinaktion);
 INSERT INTO temp_gutscheinaktion (beginnaktion, endeaktion, titel, beschreibung, gutscheincode)
