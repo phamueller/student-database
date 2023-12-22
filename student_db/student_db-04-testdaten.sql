@@ -24,6 +24,7 @@ FROM
 SELECT * FROM temp_gutscheinaktion;
 
 EXPLAIN information_schema.tables;
+
 SELECT * FROM information_schema.tables;
 SELECT * FROM information_schema.views;
 SELECT * FROM information_schema.triggers;
