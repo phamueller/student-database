@@ -18,9 +18,15 @@ INSERT INTO gutscheinaktion
 	(beginnaktion, endeaktion, titel, gutscheincode) VALUES 
 	('2023-12-20', '2023-12-26', 'Weihnachtsspecial', '1223-CHSP');
 
+INSERT INTO gutscheinaktion 
+	(beginnaktion, endeaktion, titel, gutscheincode) VALUES
+	('2023-12-20', '2024-02-01', 'Neujahrsspecial', '0124-NJSP');
+
 SELECT * FROM gutscheinaktion;
 -- Was passiert mit dem Datensatz wenn ein Datensatz gelöscht wird?
 -- Wie kann die Löschung des Datensatzes an die Tabelle marketingaktionmarketingaktio weiter gegeben werden?
+-- Was passiert bei einem Update, wenn sich beispielsweise das Beginn- oder Ende_Datum verändert?
+
 
 DROP TABLE IF EXISTS marketingaktion;
 CREATE TABLE marketingaktion (
@@ -34,7 +40,7 @@ CREATE TABLE marketingaktion (
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
-CREATE DEFINER=`ws23inf`@`%` TRIGGER ai_action
+CREATE TRIGGER ai_action
 AFTER INSERT
 ON gutscheinaktion FOR EACH ROW
 BEGIN
@@ -46,13 +52,12 @@ END;
 SELECT * FROM marketingaktion;
 
 
-
 CREATE TRIGGER ad_action
 AFTER DELETE
 ON gutscheinaktion FOR EACH ROW
 BEGIN
     UPDATE marketingaktion
-    SET status = FALSE
+    SET status = FALSE, beschreibung = 'Datensatz in Tabelle gutscheinaktion wurde gelöscht'
     WHERE fk_id = OLD.aktions_id;
 END
 
