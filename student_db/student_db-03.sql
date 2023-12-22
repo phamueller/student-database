@@ -19,8 +19,8 @@ INSERT INTO gutscheinaktion
 SELECT * FROM gutscheinaktion;
 
 UPDATE gutscheinaktion 
-	-- SET endeaktion = '2023-12-31'
-	SET endeaktion = '2023-12-26'
+	SET endeaktion = '2023-12-31'
+	-- SET endeaktion = '2023-12-26'
 WHERE gutscheincode = '1223-CHSP';
 
 SELECT * FROM gutscheinaktion;
@@ -67,6 +67,13 @@ INSERT INTO t VALUES (1.5, 12345.678, 78.46723456789, 'abcdefghij', 23);
 -- Data truncated for column 'c' at row 1
 
 SELECT * FROM t;
+
+-- Quelle: https://mariadb.com/kb/en/numeric-data-type-overview/
+-- TINYINT = 1 byte (8 bit)
+-- SMALLINT = 2 bytes (16 bit)
+-- MEDIUMINT = 3 bytes (24 bit)
+-- INT = 4 bytes (32 bit)
+-- BIGINT = 8 bytes (64 bit)
 
 
 /** Komplexe Datentypen **/
