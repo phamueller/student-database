@@ -29,3 +29,8 @@ SELECT * FROM information_schema.tables;
 SELECT * FROM information_schema.views;
 SELECT * FROM information_schema.triggers;
 
+
+-- TRIGER
+-- INDEX-STRUKTUREN
+
+
