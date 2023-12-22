@@ -10,7 +10,8 @@ CREATE TEMPORARY TABLE temp_gutscheinaktion (
     gutscheincode VARCHAR(100) NOT NULL -- UNIQUE
 );
 
-SET @counter = 0;
+
+SET @counter = (SELECT IFNULL(MAX(id), 0) FROM temp_gutscheinaktion);
 INSERT INTO temp_gutscheinaktion (beginnaktion, endeaktion, titel, beschreibung, gutscheincode)
 SELECT
     NOW(),
@@ -19,7 +20,7 @@ SELECT
     CONCAT('Beschreibung ', number),
     CONCAT('CODE', number)
 FROM
-    (SELECT @counter := @counter + 1 AS number FROM information_schema.tables LIMIT 100) AS numbers;
+    (SELECT @counter := @counter + 1 AS number FROM information_schema.tables LIMIT 50) AS numbers;
 
 SELECT * FROM temp_gutscheinaktion;
 
