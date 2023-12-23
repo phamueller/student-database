@@ -115,4 +115,43 @@ SELECT * FROM iot_sensor;
 -- Sensor mit ID 1, gemessen um 09:15 Uhr am 25. Dezember 2023, Messwert 65,2.
 -- Sensor mit ID 1, gemessen um 10:00 Uhr am 25. Dezember 2023, Messwert 1013,2.
 
+
+DROP TEMPORARY TABLE IF EXISTS iot_test;
+CREATE TEMPORARY TABLE iot_test(
+    test_id INT 
+)AUTO_INCREMENT=1;
+
+
+SELECT * FROM information_schema.routines;
+
+
+DROP PROCEDURE IF EXISTS iot_test;
+CREATE PROCEDURE iot_test()
+BEGIN
+	DECLARE var INT DEFAULT 1;
+
+	WHILE var <= 1000 DO
+		INSERT INTO iot_test (test_id)
+		VALUES (var);
+		SET var = var + 1;
+	END WHILE;
+END
+
+CALL iot_test();
+SELECT COUNT(*) FROM iot_test;
+
+INSERT INTO iot_messung (sensor_id, zeitstempel, messwert)
+SELECT
+	1,
+	NOW() - INTERVAL FLOOR(RAND() * 365) DAY,
+	(RAND() * (1200 - 25)) + 25
+FROM iot_test; -- LIMIT 1000;
+
+-- TRUNCATE TABLE iot_messung;
 SELECT * FROM iot_messung;
+SELECT COUNT(*), MAX(messwert), MIN(messwert) FROM iot_messung;
+SELECT COUNT(*), MAX(zeitstempel), MIN(zeitstempel) FROM iot_messung;
+
+-- FLOOR(RAND() * 10) + 1 as sensor_id -- Zufällige Sensor-ID zwischen 1 und 10
+-- Zufälliges Datum der letzten 365 Tage
+-- Zufälliger Messwert zwischen 25 und 1200 (als FLOAT)
