@@ -15,4 +15,4 @@ Im Namensraum iot werden beispielhafte Datenstrukturen zur Speicherung von IOT-D
 
 ### Kontakt
 <a href="https://www.it-architecture-consulting.com/" target="_blank">
-it-architecture-consulting.com</a>Philipp A. Müller, M.Sc.
+it-architecture-consulting.com</a> Philipp A. Müller, M.Sc.
