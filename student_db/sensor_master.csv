@@ -1,0 +1,2 @@
+sensor_typ,hersteller,standort_id,JSON_informationen
+"Drucksensor","PressureTech",1,"{""genauigkeit"": ""±1 hPa"", ""maximaler_druck"": 1200, ""minimaler_druck"": 800}"

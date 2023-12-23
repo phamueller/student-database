@@ -1,0 +1,11 @@
+{
+    "sensor_typ": "Drucksensor",
+    "hersteller": "PressureTech",
+    "standort_id": 3,
+    "JSON_informationen": {
+      "genauigkeit": "±1 hPa",
+      "maximaler_druck": 1200,
+      "minimaler_druck": 800
+    }
+  }
+  
