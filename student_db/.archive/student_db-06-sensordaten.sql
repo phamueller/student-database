@@ -145,7 +145,7 @@ SELECT
 	1,
 	NOW() - INTERVAL FLOOR(RAND() * 365) DAY,
 	(RAND() * (1200 - 25)) + 25
-FROM iot_test; -- LIMIT 1000;
+FROM iot_test;
 
 -- TRUNCATE TABLE iot_messung;
 SELECT * FROM iot_messung;
