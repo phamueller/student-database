@@ -5,4 +5,4 @@ Dieses Repository ist zur Unterstützung im Einführungskurs Datenmodellierung u
 Im Namensraum mgt werden Hierarchien in einer Organisation beispielhaft abgebildet. Zudem wird die Themen Rekursion und Trigger einführend werden verdeutlicht. 
 
 ## Namensraum IOT
-Im Namensraum iot werden Tabellen zur Speicherung von IOT-Daten erstellt. Prozeduren zur Testdatengenerierung werden thematisiert. 
+Im Namensraum iot werden Datenstrukturen zur Speicherung von IOT-Daten erstellt. Es werden unterschiedliche Format thematisiert und Prozeduren zur Testdatengenerierung. 
