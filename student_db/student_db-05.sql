@@ -1,7 +1,7 @@
 USE student_db;
 
 /** NOT NULL UNIQUE **/
-DROP TABLE IF EXISTS gutscheinaktion;
+DROP TABLE IF EXISTS mgt_gutscheinaktion;
 CREATE TABLE gutscheinaktion (
 	aktions_id INTEGER AUTO_INCREMENT,
 	beginnaktion TIMESTAMP NOT NULL,
@@ -14,22 +14,22 @@ CREATE TABLE gutscheinaktion (
 
 
 -- DELETE FROM gutscheinaktion WHERE 1=1;
-INSERT INTO gutscheinaktion 
+INSERT INTO mgt_gutscheinaktion 
 	(beginnaktion, endeaktion, titel, gutscheincode) VALUES 
 	('2023-12-20', '2023-12-26', 'Weihnachtsspecial', '1223-CHSP');
 
-INSERT INTO gutscheinaktion 
+INSERT INTO mgt_gutscheinaktion 
 	(beginnaktion, endeaktion, titel, gutscheincode) VALUES
 	('2023-12-20', '2024-02-01', 'Neujahrsspecial', '0124-NJSP');
 
-SELECT * FROM gutscheinaktion;
+SELECT * FROM mgt_utscheinaktion;
 -- Was passiert mit dem Datensatz wenn ein Datensatz gelöscht wird?
 -- Wie kann die Löschung des Datensatzes an die Tabelle marketingaktionmarketingaktio weiter gegeben werden?
 -- Was passiert bei einem Update, wenn sich beispielsweise das Beginn- oder Ende_Datum verändert?
 
 
-DROP TABLE IF EXISTS marketingaktion;
-CREATE TABLE marketingaktion (
+DROP TABLE IF EXISTS mgt_marketingaktion;
+CREATE TABLE mgt_marketingaktion (
 	aktions_id INTEGER AUTO_INCREMENT,
 	beginnaktion TIMESTAMP NOT NULL,
 	endeaktion TIMESTAMP NOT NULL,
@@ -42,21 +42,22 @@ CREATE TABLE marketingaktion (
 
 CREATE TRIGGER ai_action
 AFTER INSERT
-ON gutscheinaktion FOR EACH ROW
+ON mgt_gutscheinaktion FOR EACH ROW
 BEGIN
-    INSERT INTO marketingaktion (beginnaktion, endeaktion, beschreibung, fk_id)
+    INSERT INTO mgt_marketingaktion (beginnaktion, endeaktion, beschreibung, fk_id)
     VALUES (NEW.beginnaktion, NEW.endeaktion, 'Eine E-Mail-Aktion als Weihnachtsspecial', NEW.aktions_id);
 END;
 
+
 -- DELETE FROM marketingaktion WHERE 1=1;
-SELECT * FROM marketingaktion;
+SELECT * FROM mgt_marketingaktion;
 
 
 CREATE TRIGGER ad_action
 AFTER DELETE
-ON gutscheinaktion FOR EACH ROW
+ON mgt_gutscheinaktion FOR EACH ROW
 BEGIN
-    UPDATE marketingaktion
+    UPDATE mgt_marketingaktion
     SET status = FALSE, beschreibung = 'Datensatz in Tabelle gutscheinaktion wurde gelöscht'
     WHERE fk_id = OLD.aktions_id;
 END
