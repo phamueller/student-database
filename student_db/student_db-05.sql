@@ -2,7 +2,7 @@ USE student_db;
 
 /** NOT NULL UNIQUE **/
 DROP TABLE IF EXISTS mgt_gutscheinaktion;
-CREATE TABLE gutscheinaktion (
+CREATE TABLE mgt_gutscheinaktion (
 	aktions_id INTEGER AUTO_INCREMENT,
 	beginnaktion TIMESTAMP NOT NULL,
 	endeaktion TIMESTAMP NOT NULL,
@@ -12,8 +12,8 @@ CREATE TABLE gutscheinaktion (
 	PRIMARY KEY (aktions_id)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
-
--- DELETE FROM gutscheinaktion WHERE 1=1;
+-- TRUNCATE TABLE mgt_gutscheinaktion;
+-- DELETE FROM mgt_gutscheinaktion WHERE gutscheincode='1223-CHSP';
 INSERT INTO mgt_gutscheinaktion 
 	(beginnaktion, endeaktion, titel, gutscheincode) VALUES 
 	('2023-12-20', '2023-12-26', 'Weihnachtsspecial', '1223-CHSP');
@@ -22,7 +22,7 @@ INSERT INTO mgt_gutscheinaktion
 	(beginnaktion, endeaktion, titel, gutscheincode) VALUES
 	('2023-12-20', '2024-02-01', 'Neujahrsspecial', '0124-NJSP');
 
-SELECT * FROM mgt_utscheinaktion;
+SELECT * FROM mgt_gutscheinaktion;
 -- Was passiert mit dem Datensatz wenn ein Datensatz gelöscht wird?
 -- Wie kann die Löschung des Datensatzes an die Tabelle marketingaktionmarketingaktio weiter gegeben werden?
 -- Was passiert bei einem Update, wenn sich beispielsweise das Beginn- oder Ende_Datum verändert?
@@ -45,11 +45,11 @@ AFTER INSERT
 ON mgt_gutscheinaktion FOR EACH ROW
 BEGIN
     INSERT INTO mgt_marketingaktion (beginnaktion, endeaktion, beschreibung, fk_id)
-    VALUES (NEW.beginnaktion, NEW.endeaktion, 'Eine E-Mail-Aktion als Weihnachtsspecial', NEW.aktions_id);
+    VALUES (NEW.beginnaktion, NEW.endeaktion, CONCAT('Eine E-Mail-Aktion als ', NEW.titel), NEW.aktions_id);
 END;
 
-
--- DELETE FROM marketingaktion WHERE 1=1;
+-- TRUNCATE TABLE mgt_marketingaktion;
+-- DELETE FROM mgt_marketingaktion WHERE 1=1;
 SELECT * FROM mgt_marketingaktion;
 
 
