@@ -14,6 +14,6 @@ Im Namensraum iot werden beispielhafte Datenstrukturen zur Speicherung von IOT-D
 + Molinaro, Anthony / de Graaf, Robert (2020): SQL Cookbook. Query Solutions and Techniques for All SQL Users. Second Edition. Sebastopol, CA: O'Reilly Media, Inc. 
 
 ### Kontakt
-https://www.it-architecture-consulting.com \
+https://www.it-architecture-consulting.com/index.php?ref=github \
 IT Architecture Consulting und Management \
 Philipp A. Müller, M.Sc.
