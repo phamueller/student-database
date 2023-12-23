@@ -76,7 +76,7 @@ INSERT INTO iot_standort (standort_name, stadt, land) VALUES
 SELECT * FROM iot_standort;
 
 -- Lade die CSV-Daten aus der Datei in die Tabelle
-LOAD DATA INFILE '...\student_db\sensor_data_master.csv'
+LOAD DATA INFILE '...\sensor_data_master.csv'
 INTO TABLE sensor
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -85,7 +85,7 @@ IGNORE 1 LINES; -- Um die Header-Zeile zu ignorieren, wenn vorhanden
 
 
 -- Lade die JSON-Daten aus der Datei in die Tabelle
-LOAD DATA INFILE '...\student_db\sensor_data.json'
+LOAD DATA INFILE '...\sensor_data.json'
 INTO TABLE iot_sensor
 FIELDS TERMINATED BY ','
 LINES TERMINATED BY '\n'
@@ -100,7 +100,7 @@ SET
  -- Die Einheit "hPa" steht für "Hektopascal", was eine Maßeinheit für den Luftdruck ist. Der Ausdruck "±1 hPa" bedeutet "plus oder minus 1 Hektopascal". Der Hektopascal ist eine SI-Einheit des Drucks und entspricht einem Pascal, multipliziert mit 100.
 
  -- Lade die CSV-Daten aus der Datei in die Tabelle
-LOAD DATA INFILE '...\student_db\sensor_data.csv'
+LOAD DATA INFILE '...\sensor_data.csv'
 INTO TABLE messung
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
@@ -144,13 +144,13 @@ INSERT INTO iot_messung (sensor_id, zeitstempel, messwert)
 SELECT
 	1,
 	NOW() - INTERVAL FLOOR(RAND() * 365) DAY,
-	(RAND() * (1200 - 25)) + 25
+	(RAND() * (1200 - 800)) + 800
 FROM iot_test;
 
 -- TRUNCATE TABLE iot_messung;
 SELECT * FROM iot_messung;
 SELECT COUNT(*), MAX(messwert), MIN(messwert) FROM iot_messung;
-SELECT COUNT(*), MAX(zeitstempel), MIN(zeitstempel) FROM iot_messung;
+SELECT COUNT(*), MAX(zeitstempel), MIN(zeitstempel), DATEDIFF(MAX(zeitstempel), MIN(zeitstempel)) AS DIFF FROM iot_messung;
 
 -- FLOOR(RAND() * 10) + 1 as sensor_id -- Zufällige Sensor-ID zwischen 1 und 10
 -- Zufälliges Datum der letzten 365 Tage

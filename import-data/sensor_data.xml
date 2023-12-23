@@ -2,16 +2,16 @@
   <messung>
     <sensor_id>1</sensor_id>
     <zeitstempel>2023-12-25 08:30:00</zeitstempel>
-    <messwert>25.5</messwert>
+    <messwert>825.5</messwert>
   </messung>
   <messung>
     <sensor_id>1</sensor_id>
     <zeitstempel>2023-12-25 09:15:00</zeitstempel>
-    <messwert>27.2</messwert>
+    <messwert>827.2</messwert>
   </messung>
   <messung>
     <sensor_id>1</sensor_id>
     <zeitstempel>2023-12-25 10:00:00</zeitstempel>
-    <messwert>26.8</messwert>
+    <messwert>1013.2</messwert>
   </messung>
 </messdaten>
