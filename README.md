@@ -12,4 +12,3 @@ Im Namensraum iot werden beispielhafte Datenstrukturen zur Speicherung von IOT-D
 + Geisler, Frank (2014): Datenbanken. Grundlagen und Design. 5., aktualisierte und erweiterte Auflage. Heidelberg, München, Landsberg u. a.: mitp, Verlagsgruppe Jehle Rehm GmbH. [ISBN 978-3-8266-8719-8] 
 + Krosing, Hannu / Mlodgenski, Jim / Roybal, Kirk (2013): PostgreSQL Server Programming. Extend PostgreSQL and integrate the database layer into your development framework Birmingham: Packt Publishing Ltd.. [ISBN 978-1-84951-698-3] 
 + Molinaro, Anthony / de Graaf, Robert (2020): SQL Cookbook. Query Solutions and Techniques for All SQL Users. Second Edition. Sebastopol, CA: O'Reilly Media, Inc. 
-+ https://mariadb.com/kb/en/beginner-books/
