@@ -121,6 +121,13 @@ DROP TABLE IF EXISTS iot_hersteller;
 DROP TABLE IF EXISTS iot_standort;
 
 
+DROP TABLE IF EXISTS iot_key_value;
+CREATE TABLE iot_key_value (
+    column_key INT NOT NULL,
+    column_value VARCHAR(50)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
 TRUNCATE TABLE iot_standort;
 INSERT INTO iot_standort (standort_name, stadt, land) VALUES 
 ('Fertigungshalle A', 'Freiburg', 'Baden-Württemberg'),
