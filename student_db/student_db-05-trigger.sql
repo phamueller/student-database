@@ -85,11 +85,3 @@ BEGIN
     SET status = FALSE, beschreibung = 'Datensatz in Tabelle gutscheinaktion wurde gelöscht'
     WHERE fk_id = OLD.aktions_id;
 END
-
-
-
-
-
-
-
-

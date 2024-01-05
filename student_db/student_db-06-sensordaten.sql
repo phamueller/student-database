@@ -24,14 +24,61 @@ CREATE TABLE iot_standort (
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
+DROP TABLE IF EXISTS iot_hersteller;
+CREATE TABLE iot_hersteller (
+    hersteller_id INT AUTO_INCREMENT PRIMARY KEY,
+    hersteller_name VARCHAR(50)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS iot_einheit;
+CREATE TABLE iot_einheit (
+    einheit_id INT AUTO_INCREMENT PRIMARY KEY,
+    einheit_beschreibung VARCHAR(50)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS iot_software;
+CREATE TABLE iot_software (
+    software_id INT AUTO_INCREMENT PRIMARY KEY,
+    software_version VARCHAR(50),
+    installtions_datum DATE,
+    software_aktuell BOOL DEFAULT TRUE
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
 DROP TABLE IF EXISTS iot_sensor;
 CREATE TABLE iot_sensor (
     sensor_id INT AUTO_INCREMENT PRIMARY KEY,
-    sensor_typ VARCHAR(50),
-    hersteller VARCHAR(50),
     standort_id INT NOT NULL,
+    hersteller_id INT NOT NULL,
+    einheit_id INT NOT NULL,
+    datum_herstellung DATE,
+    sensor_typ VARCHAR(50),    
     JSON_informationen JSON,
-    FOREIGN KEY (standort_id) REFERENCES iot_standort(standort_id)
+    FOREIGN KEY (standort_id) REFERENCES iot_standort(standort_id),
+    FOREIGN KEY (hersteller_id) REFERENCES iot_hersteller(hersteller_id),
+    FOREIGN KEY (einheit_id) REFERENCES iot_einheit(einheit_id)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS iot_schwellwert;
+CREATE TABLE iot_schwellwert (
+    iot_schwellwert_id INT AUTO_INCREMENT PRIMARY KEY,
+    sensor_id INT NOT NULL,
+    min DOUBLE,
+    max DOUBLE,
+    FOREIGN KEY (sensor_id) REFERENCES iot_sensor(sensor_id)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS iot_sensor2software;
+CREATE TABLE iot_sensor2software (
+    sensor2software_id INT AUTO_INCREMENT PRIMARY KEY,
+    software_id INT NOT NULL,
+    sensor_id INT NOT NULL,
+    FOREIGN KEY (software_id) REFERENCES iot_software(software_id),
+    FOREIGN KEY (sensor_id) REFERENCES iot_sensor(sensor_id)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
@@ -48,13 +95,12 @@ CREATE TABLE iot_messung (
 DROP TABLE IF EXISTS iot_maschine;
 CREATE TABLE iot_maschine (
     maschinen_id INT AUTO_INCREMENT PRIMARY KEY,
-    maschinenname VARCHAR(50),
-    produktionslinie VARCHAR(50)
+    maschinenname VARCHAR(50)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS iot_maschinen_sensor;
-CREATE TABLE iot_maschinen_sensor (
+DROP TABLE IF EXISTS iot_maschinen2sensor;
+CREATE TABLE iot_maschinen2sensor (
     maschinen_id INT NOT NULL,
     sensor_id INT NOT NULL,
     PRIMARY KEY (maschinen_id, sensor_id),
@@ -63,11 +109,17 @@ CREATE TABLE iot_maschinen_sensor (
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS iot_maschinen_sensor;
+DROP TABLE IF EXISTS iot_sensor2software;
+DROP TABLE IF EXISTS iot_maschinen2sensor;
 DROP TABLE IF EXISTS iot_messung;
-DROP TABLE IF EXISTS iot_sensor;
 DROP TABLE IF EXISTS iot_maschine;
+DROP TABLE IF EXISTS iot_software;
+DROP TABLE IF EXISTS iot_schwellwert;
+DROP TABLE IF EXISTS iot_sensor;
+DROP TABLE IF EXISTS iot_einheit;
+DROP TABLE IF EXISTS iot_hersteller;
 DROP TABLE IF EXISTS iot_standort;
+
 
 TRUNCATE TABLE iot_standort;
 INSERT INTO iot_standort (standort_name, stadt, land) VALUES 
@@ -121,24 +173,21 @@ CREATE TEMPORARY TABLE iot_test(
     test_id INT 
 )AUTO_INCREMENT=1;
 
-
 SELECT * FROM information_schema.routines;
 
 
 DROP PROCEDURE IF EXISTS iot_test;
 CREATE PROCEDURE iot_test()
 BEGIN
-	DECLARE var INT DEFAULT 1;
-
-	WHILE var <= 1000 DO
-		INSERT INTO iot_test (test_id)
-		VALUES (var);
-		SET var = var + 1;
+	DECLARE counter INT DEFAULT 1;
+	WHILE counter <= 1000 DO
+		INSERT INTO iot_test (test_id) VALUES (counter);
+		SET counter = counter + 1;
 	END WHILE;
 END
 
 CALL iot_test();
-SELECT COUNT(*) FROM iot_test;
+SELECT COUNT(*) FROM iot_test;  -- iot_test ist eine temporäre Tabelle
 
 INSERT INTO iot_messung (sensor_id, zeitstempel, messwert)
 SELECT
