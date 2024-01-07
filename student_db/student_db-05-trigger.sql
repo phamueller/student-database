@@ -23,20 +23,20 @@ SELECT
     titel AS Gutschein_Titel,
     DATEDIFF(endeaktion, beginnaktion) AS Differenz_in_Tagen
 FROM
-    gutscheinaktion;
+    mgt_gutscheinaktion;
 
 -- Einfügen eines neuen Datensatzes mit INSERT FROM TABLE
-INSERT INTO gutscheinaktion 
+INSERT INTO mgt_gutscheinaktion 
 	(beginnaktion, endeaktion, titel, gutscheincode)
 SELECT beginnaktion, '2024-02-01', 'Neujahrsspecial', '0124-NJSP' 
-	FROM gutscheinaktion 
+	FROM mgt_gutscheinaktion 
 WHERE gutscheincode = '1223-CHSP';
 
-DELETE FROM gutscheinaktion WHERE gutscheincode = '0124-NJSP';
+DELETE FROM mgt_gutscheinaktion WHERE gutscheincode = '0124-NJSP';
 
-SELECT * FROM gutscheinaktion;
+SELECT * FROM mgt_gutscheinaktion;
 
-UPDATE gutscheinaktion 
+UPDATE mgt_gutscheinaktion 
 	SET beginnaktion = '2024-01-01'
 WHERE gutscheincode = '0124-NJSP';
 
