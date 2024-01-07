@@ -1,8 +1,8 @@
 USE student_db;
 
 /** Typenkonvertierung **/
-DROP TABLE IF EXISTS test_t;
-CREATE TABLE test_t (
+DROP TABLE IF EXISTS t;
+CREATE TABLE t (
 	i INTEGER, 
 	d DECIMAL(5,2), 
 	f FLOAT, 
@@ -10,14 +10,14 @@ CREATE TABLE test_t (
 	b BOOLEAN
 );
 
-INSERT INTO test_t VALUES (1, 123.45, 78.46723, 'abc', TRUE);
-INSERT INTO test_t VALUES (1.5, 12345.678, 78.46723456789, 'abcdefghij', 23);
+INSERT INTO t VALUES (1, 123.45, 78.46723, 'abc', TRUE);
+INSERT INTO t VALUES (1.5, 12345.678, 78.46723456789, 'abcdefghij', 23);
 
 -- Warning!
 -- Out of range value for column 'd' at row 1
 -- Data truncated for column 'c' at row 1
 
-SELECT * FROM test_t;
+SELECT * FROM t;
 
 -- Quelle: https://mariadb.com/kb/en/numeric-data-type-overview/
 -- TINYINT = 1 byte (8 bit)
@@ -28,8 +28,8 @@ SELECT * FROM test_t;
 
 
 /** Komplexe Datentypen **/
-DROP TABLE IF EXISTS test_k;
-CREATE TABLE test_k (
+DROP TABLE IF EXISTS k;
+CREATE TABLE k (
 	datumNull DATE, 
 	zeitNull TIME, 
 	zeitpunktNull TIMESTAMP,
@@ -38,8 +38,8 @@ CREATE TABLE test_k (
 	zeitpunktNotNull TIMESTAMP NOT NULL
 );
 
-INSERT INTO test_k VALUES 
+INSERT INTO k VALUES 
 ('2014–11–11', '12:12:12', '2014–11–11 12:12:12', '2014–11–11', '12:12:12', '2014–11–11 12:12:12'),
 ('2014', '122X', '2014 122', '2014', '122', '2014 122');
 
-SELECT * FROM test_k;
+SELECT * FROM k;
