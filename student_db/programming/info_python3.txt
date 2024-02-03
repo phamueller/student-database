@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+# python3 --version
+# which python3
+
+# apt install python3-pip
+# pip3 install mysql-connector-python
