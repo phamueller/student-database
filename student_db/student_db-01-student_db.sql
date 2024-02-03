@@ -84,7 +84,8 @@ ORDER BY s.student_number ASC
 LIMIT 200; -- DESC
 
 
--- Index Structures
+-- Index Structures (Excursus Index Structures)
+-- ============================================
 -- Clustered and Non-Clustered Index Structures
 -- Unique and Non-Unique Index Structures 
 
