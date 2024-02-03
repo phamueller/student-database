@@ -7,14 +7,17 @@
 import sys
 import mysql.connector
 
-gv_username = "hans"            # gv_ = global variable
-gv_password = "kennwort"
-gf_password = "../secret/pwd"    # gf_ = file name
-gv_database = "student_db"
-gv_host = "31.214.242.135"
+gv_username    = "user"                  # gv_ = global variable 
+gv_password    = "kennwort"
+gv_host        = "connection"
+gf_password    = "../secret/pwd"         # gf_ = global file 
+gf_host        = "../secret/host"
+gv_database    = "student_db"
+gv_host        = "127.0.0.1"
+gv_port        = "1234"
 
 # Function for reading secrets
-def fct_reading_secrets():
+def fct_reading_secret():
     global gv_username, gv_password
 
     f = open(gf_password, "r")
@@ -23,7 +26,17 @@ def fct_reading_secrets():
     gv_password = lines[1]
     f.close()
 
-fct_reading_secrets()
+def fct_reading_host():
+    global gv_host
+
+    f = open(gf_host, "r")
+    lines = f.readlines()
+    gv_host = lines[0]
+    gv_port = lines[1]
+    f.close()
+
+fct_reading_secret()
+fct_reading_host()
 
 # Debugging: Printing secrets
 #sys.stdout.write('username: ' + gv_username + "\n")
@@ -33,7 +46,7 @@ mysql_conn = mysql.connector.connect(
   user = gv_username,
   password = gv_password,
   host = gv_host,
-  port = 3306,
+  port = gv_port,
   database = gv_database
 )
 
