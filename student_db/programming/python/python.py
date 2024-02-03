@@ -26,7 +26,7 @@ def fct_reading_secret():
     gv_password = lines[1]
     f.close()
 
-def fct_reading_host():
+def fct_reading_connection():
     global gv_host
 
     f = open(gf_host, "r")
@@ -36,7 +36,7 @@ def fct_reading_host():
     f.close()
 
 fct_reading_secret()
-fct_reading_host()
+fct_reading_connection()
 
 # Debugging: Printing secrets
 #sys.stdout.write('username: ' + gv_username + "\n")

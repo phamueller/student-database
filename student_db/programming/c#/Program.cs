@@ -18,6 +18,16 @@ internal class Program
         // Console.WriteLine(user + " " + password);
     }
 
+    private static void readConnection() {
+        string file = @"..\secret\host.txt";
+        string[] lines = File.ReadAllLines(file);
+
+        host = lines[0];
+        port = lines[1]; // not used
+        
+        // Console.WriteLine(host + " " + port);
+    }
+
     private static void Main(string[] args)
     {
         readSecret();
@@ -25,7 +35,7 @@ internal class Program
         try
         {
             MySqlConnection conn;
-            conn = new MySqlConnection("server=31.214.242.135;uid="+user+";pwd="+password+";database=student_db");
+            conn = new MySqlConnection("server="+host+";uid="+user+";pwd="+password+";database=student_db");
             string query = "SELECT student_id, student_name, student_number, student_class, student_major FROM student;";
 
             MySqlCommand cmd = new MySqlCommand(query, conn);
