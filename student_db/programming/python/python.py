@@ -38,7 +38,7 @@ mysql_conn = mysql.connector.connect(
 )
 
 cursor = mysql_conn.cursor()
-cursor.execute("SELECT * FROM student;")
+cursor.execute("SELECT student_id, student_name, student_number, student_class, student_major FROM student;")
 
 resultset = cursor.fetchall()
 
