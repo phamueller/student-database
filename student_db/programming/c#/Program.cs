@@ -7,6 +7,8 @@ internal class Program
 {
     static string user = null;
     static string password = null;
+    static string host = null;
+    static string port = null;
 
     private static void readSecret() {
         string file = @"..\secret\pwd.txt";
@@ -31,6 +33,7 @@ internal class Program
     private static void Main(string[] args)
     {
         readSecret();
+        readConnection();
 
         try
         {

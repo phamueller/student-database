@@ -1,0 +1,19 @@
+rem ---------------------------------------------------
+rem Eigenschaften > Build > Eregnisse (PreBuild-Skript)
+rem ---------------------------------------------------
+
+@echo off
+
+rmdir /s /q .\bin\Debug\secret
+mkdir .\bin\Debug\secret
+
+del /q \bin\Debug\secret\*.txt
+copy /y pwd.txt .\bin\Debug\secret\
+copy /y host.txt .\bin\Debug\secret\
+
+rmdir /s /q .\bin\Release\secret
+mkdir .\bin\Release\secret
+
+del /q \bin\Debug\secret\*.txt
+copy /y pwd.txt .\bin\Release\secret\
+copy /y host.txt .\bin\Release\secret\
